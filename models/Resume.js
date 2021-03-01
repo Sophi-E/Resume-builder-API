@@ -103,6 +103,9 @@ const ResumeSchema = new Schema({
     portfolio: {
       type: String,
     },
+    github: {
+      type: String,
+    },
   },
   date: {
     type: Date,
