@@ -3,6 +3,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const UserRoute = require("./routes/user");
+const AuthRoute = require("./routes/auth");
 
 //Load environment variables
 dotenv.config({ path: "./config/config.env" });
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 //Load route files
 app.use("/api/users", UserRoute);
+app.use("/api/auth", AuthRoute);
 
 const server = app.listen(
   PORT,
