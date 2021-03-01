@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const UserRoute = require("./routes/user");
 
 //Load environment variables
 dotenv.config({ path: "./config/config.env" });
@@ -15,6 +16,9 @@ const app = express();
 app.use(express.json({ extended: false }));
 
 const PORT = process.env.PORT || 5000;
+
+//Load route files
+app.use("/api/users", UserRoute);
 
 const server = app.listen(
   PORT,
