@@ -102,4 +102,33 @@ router.put("/experience", auth, async (req, res) => {
   }
 });
 
+//Add education to resume
+//Route : api/resume/education
+
+router.put("/education", [auth], async (req, res) => {
+  const { school, degree, fieldofstudy, from, to, current } = req.body;
+
+  const newEdu = {
+    school,
+    degree,
+    fieldofstudy,
+    from,
+    to,
+    current,
+  };
+
+  try {
+    const resume = await Resume.findOne({ user: req.user.id });
+
+    resume.education.push(newEdu);
+
+    await resume.save();
+
+    res.json(resume);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
