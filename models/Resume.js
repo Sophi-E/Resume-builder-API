@@ -25,7 +25,6 @@ const ResumeSchema = new Schema({
   },
   skills: {
     type: [String],
-    required: true,
   },
   summary: {
     type: String,
@@ -35,18 +34,15 @@ const ResumeSchema = new Schema({
     {
       title: {
         type: String,
-        required: true,
       },
       company: {
         type: String,
-        required: true,
       },
       location: {
         type: String,
       },
       from: {
         type: Date,
-        required: true,
       },
       to: {
         type: Date,

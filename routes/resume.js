@@ -41,13 +41,13 @@ router.post("/", auth, async (req, res) => {
     resumeFields.skills = skills.split(",").map((skill) => skill);
   }
 
-  resumeFields.socials = {};
-  if (youtube) profileFields.social.youtube = youtube;
-  if (twitter) profileFields.social.twitter = twitter;
-  if (github) profileFields.social.github = github;
-  if (instagram) profileFields.social.instagram = instagram;
-  if (linkedin) profileFields.social.linkedin = linkedin;
-  if (portfolio) profileFields.social.portfolio = portfolio;
+  resumeFields.social = {};
+  if (youtube) resumeFields.social.youtube = youtube;
+  if (twitter) resumeFields.social.twitter = twitter;
+  if (github) resumeFields.social.github = github;
+  if (instagram) resumeFields.social.instagram = instagram;
+  if (linkedin) resumeFields.social.linkedin = linkedin;
+  if (portfolio) resumeFields.social.portfolio = portfolio;
 
   try {
     let resume = await Resume.findOne({ user: req.user.id });
@@ -62,7 +62,7 @@ router.post("/", auth, async (req, res) => {
       return res.json(resume);
     }
 
-    resume = new resume(resumeFields);
+    resume = new Resume(resumeFields);
     await resume.save();
 
     res.json(resume);
@@ -71,3 +71,35 @@ router.post("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+//Add experience to profile
+//Route : api/profile/experience
+
+router.put("/experience", auth, async (req, res) => {
+  const { title, company, location, from, to, current, description } = req.body;
+
+  const newExp = {
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    description,
+  };
+
+  try {
+    const resume = await Resume.findOne({ user: req.user.id });
+
+    resume.experience.push(newExp);
+
+    await resume.save();
+
+    res.json(resume);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+module.exports = router;
