@@ -4,7 +4,7 @@
   "description": "Server and database service for react resume builder",
   "main": "server.js",
   "scripts": {
-    "start": "SET NODE_ENV=production & node server",
+    "start": "SET NODE_ENV=production & nodemon server",
     "dev": "SET NODE_ENV=development & nodemon server"
   },
   "author": "Sophia Enakpoya",
