@@ -24,10 +24,7 @@ app.use("/api/users", UserRoute);
 app.use("/api/auth", AuthRoute);
 app.use("/api/resume", ResumeRoute);
 
-const server = app.listen(
-  PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
+const server = app.listen(PORT, console.log(`Server running on port ${PORT}`));
 
 process.on("unhandledRejection", (err, promise) => {
   console.log(`Error: ${err.message}`);
