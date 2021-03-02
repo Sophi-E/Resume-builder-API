@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const UserRoute = require("./routes/user");
 const AuthRoute = require("./routes/auth");
@@ -13,6 +14,12 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 //Bodyparser
 app.use(express.json({ extended: false }));
@@ -30,3 +37,5 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Error: ${err.message}`);
   server.close(() => process.exit(1));
 });
+
+//TODO change allowed origin from local host
