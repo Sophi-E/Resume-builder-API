@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 
 const auth = require("../middleware/auth");
 
@@ -72,8 +72,8 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-//Add experience to profile
-//Route : api/profile/experience
+//Add experience to resume
+//Route : api/resume/experience
 
 router.put("/experience", auth, async (req, res) => {
   const { title, company, location, from, to, current, description } = req.body;
