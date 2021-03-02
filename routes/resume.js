@@ -105,7 +105,7 @@ router.put("/experience", auth, async (req, res) => {
 //Add education to resume
 //Route : api/resume/education
 
-router.put("/education", [auth], async (req, res) => {
+router.put("/education", auth, async (req, res) => {
   const { school, degree, fieldofstudy, from, to, current } = req.body;
 
   const newEdu = {
