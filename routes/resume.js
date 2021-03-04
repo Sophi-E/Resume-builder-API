@@ -7,6 +7,24 @@ const auth = require("../middleware/auth");
 const Resume = require("../models/Resume");
 const User = require("../models/User");
 
+//Get a user's resume
+//Route: api/resume/me
+
+router.get("/me", auth, async (req, res) => {
+  try {
+    const resume = await Resume.findOne({
+      user: req.user.id,
+    });
+    if (!resume) {
+      return res.status(400).json({ msg: "There is no resume for this user" });
+    }
+    res.json(resume);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 //Create or update a resume
 //Route : api/resume
 
